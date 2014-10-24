@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Ember Starter Kit</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <script type="text/x-handlebars">
+    <div class="navbar">
+      <div class="navbar-inner">
+        {{#link-to 'index' class='brand'}}42call{{/link-to}}
+        <ul class="nav">
+          <li id="loginbtn">{{#link-to 'login'}}Login{{/link-to}}</li>
+          <li id="smsbtn">{{#link-to 'sms'}}SMS{{/link-to}}</li>
+          <li>{{#link-to 'about'}}About{{/link-to}}</li>
+        </ul>
+      </div>
+    </div>
+
+    {{outlet}}
+  </script>
+
+  <script type="text/x-handlebars" id="login">
+    <div>
+      {{#if loginFailed}}
+        <div class="alert alert-danger">Invalid username or password.</div>
+      {{/if}}
+      {{#if loginOk}}
+        <div class="alert alert-success">Welcome friend.</div>
+      {{else}}
+      <form class="form-horizontal" {{action "login" on="submit"}}>
+        <div class="control-group">
+          <div class="control-label">
+            <label>Username</label>
+          </div>
+
+          <div class="controls">
+            {{input value=username type="text"}}
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <label>Password</label>
+          </div>
+
+          <div class="controls">
+            {{input value=password type="password"}}
+          </div>
+        </div>
+
+        <button type="submit" class="btn">Log in!</button>
+      </form>
+      {{/if}}
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" id="sms">
+    <div>
+      {{#if smsFailed}}
+        <div class="alert alert-danger">Error.</div>
+      {{/if}}
+      {{#if smsOk}}
+        <div class="alert alert-success">Send.</div>
+      {{else}}
+      {{#if loginOk}}
+      <form class="form-horizontal" {{action "sendsms" on="submit"}}>
+        <div class="control-group">
+          <div class="control-label">
+            <label>Text</label>
+          </div>
+
+          <div class="controls">
+            {{input value=text type="text"}}
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <label>Destination</label>
+          </div>
+
+          <div class="controls">
+            {{input value=number type="text"}}
+          </div>
+        </div>
+
+        <button type="submit" class="btn">Send!</button>
+      </form>
+      {{else}}
+       <div class="alert alert-info">Login first.</div>
+      {{/if}}
+      {{/if}}
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" id="about">
+    <div>
+      <p>
+        This is a very low Ember.js example for how to use the<br />
+        public REST API of 42com for sending a simple SMS.<br />
+        <br />
+        For checking you need an account at <a href="http://www.42call.com/" target="_blank">42call.com</a><br />
+        <br />
+        Have a look at <a href="https://github.com/mitchobrian/42call-sms-Emberjs" target="_blank">Github</a>.
+    </div>
+  </script>
+
+  <script src="js/libs/jquery-1.10.2.js"></script>
+  <script src="js/libs/handlebars-1.1.2.js"></script>
+  <script src="js/libs/ember-1.7.0.js"></script>
+  <script src="js/libs/jquery.base64.js"></script>
+  <script type="text/javascript" src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+  <script type="text/javascript" src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha1.js"></script>
+  <script type="text/javascript" src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/components/enc-base64-min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.1.0/moment.min.js"></script>
+
+  <script src="js/login.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
